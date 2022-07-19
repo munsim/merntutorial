@@ -9,7 +9,7 @@ function App() {
   const [list, setlist] = useState([{ name: "", age: "0", _id: "" }]);
   const addFriend = () => {
     axios
-      .post("http://localhost:3001/addfriend", { name: name, age: age })
+      .post("https://mernsm.herokuapp.com/addfriend", { name: name, age: age })
       .then((response) => {
         setname("");
         setage(0);
@@ -29,7 +29,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/read")
+      .get("https://mernsm.herokuapp.com/read")
       .then((res) => {
         setlist(res.data);
       })
@@ -42,7 +42,7 @@ function App() {
     const newAge = prompt("Enter new age:");
 
     axios
-      .put("http://localhost:3001/update", { newage: newAge, id: id })
+      .put("https://mernsm.herokuapp.com/update", { newage: newAge, id: id })
       .then(() => {
         setlist(
           list.map((val: any) => {
@@ -54,7 +54,7 @@ function App() {
       });
   };
   const deletefriend = (id: any) => {
-    axios.delete(`http://localhost:3001/delete/${id}`).then(() => {
+    axios.delete(`https://mernsm.herokuapp.com/delete/${id}`).then(() => {
       setlist(
         list.filter((val: any) => {
           return val._id != id;
