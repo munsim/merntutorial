@@ -9,7 +9,10 @@ const Friends = () => {
   const [list, setlist] = useState([{ name: "", age: "0", _id: "" }]);
   const addFriend = () => {
     axios
-      .post("http://localhost:3001/addfriend", { name: name, age: age })
+      .post("https://merntesting.netlify.app/addfriend", {
+        name: name,
+        age: age,
+      })
       .then((response) => {
         console.log(response);
       })
@@ -27,7 +30,7 @@ const Friends = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/read")
+      .get("https://merntesting.netlify.app/read")
       .then((res) => {
         setlist(res.data);
       })
@@ -40,7 +43,7 @@ const Friends = () => {
     const newAge = prompt("Enter new age:");
 
     axios
-      .put("http://localhost:3001/update", { newage: newAge, id: id })
+      .put("https://merntesting.netlify.app/update", { newage: newAge, id: id })
       .then(() => {
         setlist(
           list.map((val: any) => {
@@ -52,7 +55,7 @@ const Friends = () => {
       });
   };
   const deletefriend = (id: any) => {
-    axios.delete(`http://localhost:3001/delete/${id}`).then(() => {
+    axios.delete(`https://merntesting.netlify.app/delete/${id}`).then(() => {
       setlist(
         list.filter((val: any) => {
           return val._id != id;
@@ -60,7 +63,7 @@ const Friends = () => {
       );
     });
   };
-  //http://localhost:3001/addfriend
+  //https://merntesting.netlify.app/addfriend
   return (
     <>
       <div style={{ display: "flex", flexDirection: "row" }}>
@@ -99,9 +102,6 @@ const Friends = () => {
               );
             })}
           </div>
-        </div>
-        <div>
-          <Random />
         </div>
       </div>
     </>

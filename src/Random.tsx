@@ -21,7 +21,7 @@ const Random = () => {
       alert("cant be blank");
     } else {
       axios
-        .post("https://merntesting.netlify.app/addtext", {
+        .post("http://localhost:3001/addtext", {
           text: text,
         })
         .then((res) => {
@@ -47,7 +47,7 @@ const Random = () => {
 
   useEffect(() => {
     axios
-      .get("https://merntesting.netlify.app/read2")
+      .get("http://localhost:3001/read2")
       .then((res) => {
         console.log(res.data);
         setmessages(res.data);
@@ -59,7 +59,7 @@ const Random = () => {
 
   const deletetext = (id: any) => {
     axios
-      .delete(`https://merntesting.netlify.app/deletetext/${id}`)
+      .delete(`http://localhost:3001/deletetext/${id}`)
       .then((res) => {
         setmessages(
           messages.filter((item: any) => {
@@ -80,10 +80,7 @@ const Random = () => {
       return; //break out of the function early
     } else {
       axios
-        .put("https://merntesting.netlify.app/updatetext", {
-          text: newText,
-          id: id,
-        })
+        .put("http://localhost:3001/updatetext", { text: newText, id: id })
         .then((res) => {
           setmessages(
             messages.map((item: any) => {
