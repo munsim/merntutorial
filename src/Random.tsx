@@ -56,7 +56,7 @@ const Random = () => {
       .catch(() => {
         console.log("ERR");
       });
-  }, [text]);
+  }, []);
 
   const deletetext = (id: any) => {
     axios
