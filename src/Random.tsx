@@ -21,7 +21,7 @@ const Random = () => {
       alert("cant be blank");
     } else {
       axios
-        .post("https://www.smntest.me//addtext", {
+        .post("https://www.smntest.me/addtext", {
           text: text,
         })
         .then((res) => {
@@ -47,7 +47,7 @@ const Random = () => {
 
   useEffect(() => {
     axios
-      .get("https://www.smntest.me//read2")
+      .get("https://www.smntest.me/read2")
       .then((res) => {
         console.log(res.data);
         setmessages(res.data);
@@ -59,7 +59,7 @@ const Random = () => {
 
   const deletetext = (id: any) => {
     axios
-      .delete(`https://www.smntest.me//deletetext/${id}`)
+      .delete(`https://www.smntest.me/deletetext/${id}`)
       .then((res) => {
         setmessages(
           messages.filter((item: any) => {
@@ -80,7 +80,7 @@ const Random = () => {
       return; //break out of the function early
     } else {
       axios
-        .put("https://www.smntest.me//updatetext", { text: newText, id: id })
+        .put("https://www.smntest.me/updatetext", { text: newText, id: id })
         .then((res) => {
           setmessages(
             messages.map((item: any) => {
