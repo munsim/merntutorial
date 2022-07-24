@@ -50,13 +50,13 @@ const Random = () => {
       .get("https://mernsm.herokuapp.com/read2")
       .then((res) => {
         setmessages(res.data);
-        setupdated(new Date());
+
         console.log("render");
       })
       .catch(() => {
         console.log("ERR");
       });
-  }, [text, updated]);
+  }, [text]);
 
   const deletetext = (id: any) => {
     axios
