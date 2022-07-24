@@ -9,7 +9,7 @@ const Friends = () => {
   const [list, setlist] = useState([{ name: "", age: "0", _id: "" }]);
   const addFriend = () => {
     axios
-      .post("https://merntesting.netlify.app/addfriend", {
+      .post("https://mernsm.herokuapp.com/addfriend", {
         name: name,
         age: age,
       })
@@ -30,7 +30,7 @@ const Friends = () => {
 
   useEffect(() => {
     axios
-      .get("https://merntesting.netlify.app/read")
+      .get("https://mernsm.herokuapp.com/read")
       .then((res) => {
         setlist(res.data);
       })
@@ -43,7 +43,7 @@ const Friends = () => {
     const newAge = prompt("Enter new age:");
 
     axios
-      .put("https://merntesting.netlify.app/update", { newage: newAge, id: id })
+      .put("https://mernsm.herokuapp.com/update", { newage: newAge, id: id })
       .then(() => {
         setlist(
           list.map((val: any) => {
@@ -55,7 +55,7 @@ const Friends = () => {
       });
   };
   const deletefriend = (id: any) => {
-    axios.delete(`https://merntesting.netlify.app/delete/${id}`).then(() => {
+    axios.delete(`https://mernsm.herokuapp.com/delete/${id}`).then(() => {
       setlist(
         list.filter((val: any) => {
           return val._id != id;
@@ -63,7 +63,7 @@ const Friends = () => {
       );
     });
   };
-  //https://merntesting.netlify.app/addfriend
+  //https://mernsm.herokuapp.com/addfriend
   return (
     <>
       <div style={{ display: "flex", flexDirection: "row" }}>

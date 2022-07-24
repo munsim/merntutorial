@@ -21,7 +21,7 @@ const Random = () => {
       alert("cant be blank");
     } else {
       axios
-        .post("https://www.smntest.me/addtext", {
+        .post("https://mernsm.herokuapp.com/addtext", {
           text: text,
         })
         .then((res) => {
@@ -47,7 +47,7 @@ const Random = () => {
 
   useEffect(() => {
     axios
-      .get("https://www.smntest.me/read2")
+      .get("https://mernsm.herokuapp.com/read2")
       .then((res) => {
         console.log(res.data);
         setmessages(res.data);
@@ -59,7 +59,7 @@ const Random = () => {
 
   const deletetext = (id: any) => {
     axios
-      .delete(`https://www.smntest.me/deletetext/${id}`)
+      .delete(`https://mernsm.herokuapp.com/deletetext/${id}`)
       .then((res) => {
         setmessages(
           messages.filter((item: any) => {
@@ -80,7 +80,10 @@ const Random = () => {
       return; //break out of the function early
     } else {
       axios
-        .put("https://www.smntest.me/updatetext", { text: newText, id: id })
+        .put("https://mernsm.herokuapp.com/updatetext", {
+          text: newText,
+          id: id,
+        })
         .then((res) => {
           setmessages(
             messages.map((item: any) => {
