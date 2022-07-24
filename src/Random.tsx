@@ -5,7 +5,7 @@ import "./App.css";
 
 const Random = () => {
   const inputref = useRef<any>(null);
-
+  const [updated, setupdated] = useState<any>("");
   const [text, settext] = useState<any>("");
   const [time, settime] = useState("");
   const typetext = (e: any) => {
@@ -49,13 +49,14 @@ const Random = () => {
     axios
       .get("https://mernsm.herokuapp.com/read2")
       .then((res) => {
-        console.log(res.data);
         setmessages(res.data);
+        setupdated(new Date());
+        console.log("render");
       })
       .catch(() => {
         console.log("ERR");
       });
-  }, [text, messages]);
+  }, [text, updated]);
 
   const deletetext = (id: any) => {
     axios
