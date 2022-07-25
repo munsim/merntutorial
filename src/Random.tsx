@@ -20,7 +20,7 @@ const Random = () => {
       alert("Input cant be blank");
     } else {
       axios
-        .post("http://localhost:3001/addtext", {
+        .post("https://mernsm.herokuapp.com/addtext", {
           text: text,
         })
         .then((res) => {
@@ -36,7 +36,7 @@ const Random = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/read2")
+      .get("https://mernsm.herokuapp.com/read2")
       .then((res) => {
         setmessages(res.data);
         console.log("render");
@@ -48,8 +48,8 @@ const Random = () => {
 
   const deletetext = (id: any) => {
     axios
-      //.delete(`http://localhost:3001/deletetext/${id}`)
-      .delete("http://localhost:3001/deletetext", { data: { id: id } })
+      //.delete(`https://mernsm.herokuapp.com/deletetext/${id}`)
+      .delete("https://mernsm.herokuapp.com/deletetext", { data: { id: id } })
       .then((res) => {
         setmessages(
           messages.filter((item: any) => {
@@ -71,7 +71,7 @@ const Random = () => {
     }
     try {
       axios
-        .put("http://localhost:3001/updatetext", {
+        .put("https://mernsm.herokuapp.com/updatetext", {
           text: newText,
           id: id,
         })
@@ -124,20 +124,28 @@ const Random = () => {
               marginTop: "5px",
               width: "100vw",
               justifyContent: "center",
+              alignItems: "center",
             }}
             key={index}
           >
-            <p>
-              {index + 1}. {item.text}
+            <p> {index + 1}.</p>
+            <p
+              style={{
+                width: "40vw",
+                marginLeft: "3px",
+                overflowWrap: "break-word",
+              }}
+            >
+              {item.text}
             </p>
             <button
-              style={{ marginLeft: "10px", height: "30px", marginTop: "5px" }}
+              style={{ marginLeft: "10px", height: "30px" }}
               onClick={() => updatetext(item._id)}
             >
               Update
             </button>
             <button
-              style={{ marginLeft: "10px", height: "30px", marginTop: "5px" }}
+              style={{ marginLeft: "10px", height: "30px" }}
               onClick={() => deletetext(item._id)}
             >
               Delete

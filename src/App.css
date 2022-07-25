@@ -9,7 +9,7 @@ body {
   background-color: lightyellow;
 }
 .inputs {
-  height: 400px;
+  height: 300px;
   width: 80vw;
   background-color: lightgreen;
   display: flex;
@@ -57,7 +57,7 @@ body {
 }
 
 .textinput {
-  width: 450px;
+  width: 350px;
   height: 30px;
   margin-top: 10px;
 }
