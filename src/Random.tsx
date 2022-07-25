@@ -5,7 +5,6 @@ import "./App.css";
 
 const Random = () => {
   const inputref = useRef<any>(null);
-  const [updated, setupdated] = useState<any>("");
   const [text, settext] = useState<any>("");
   const [time, settime] = useState("");
   const typetext = (e: any) => {
@@ -18,13 +17,14 @@ const Random = () => {
 
   const addtext = () => {
     if (text.length === 0) {
-      alert("cant be blank");
+      alert("Input cant be blank");
     } else {
       axios
-        .post("https://mernsm.herokuapp.com/addtext", {
+        .post("http://localhost:3001/addtext", {
           text: text,
         })
         .then((res) => {
+          console.log("added rerender");
           setmessages([...messages, { text: text }]);
           settext("");
         })
@@ -35,32 +35,21 @@ const Random = () => {
   };
 
   useEffect(() => {
-    var current = new Date();
-    var time1 = current.toLocaleTimeString();
-    var cy = current.getFullYear();
-    var cm = current.getMonth() + 1;
-    var cd = current.getDate();
-
-    var time2 = current.toLocaleDateString();
-    settime(`${cd}/${cm}/${cy} at ${time1}`);
-  }, [text]);
-
-  useEffect(() => {
     axios
-      .get("https://mernsm.herokuapp.com/read2")
+      .get("http://localhost:3001/read2")
       .then((res) => {
         setmessages(res.data);
-
         console.log("render");
       })
       .catch(() => {
         console.log("ERR");
       });
-  }, []);
+  }, [text]);
 
   const deletetext = (id: any) => {
     axios
-      .delete(`https://mernsm.herokuapp.com/deletetext/${id}`)
+      //.delete(`http://localhost:3001/deletetext/${id}`)
+      .delete("http://localhost:3001/deletetext", { data: { id: id } })
       .then((res) => {
         setmessages(
           messages.filter((item: any) => {
@@ -69,7 +58,7 @@ const Random = () => {
         );
       })
       .catch((error) => {
-        console.log(error);
+        console.log(`HERE IS THE ERROR: ${error}`);
       });
   };
 
@@ -79,24 +68,38 @@ const Random = () => {
       alert("Can't be blank");
     } else if (newText === null) {
       return; //break out of the function early
-    } else {
+    }
+    try {
       axios
-        .put("https://mernsm.herokuapp.com/updatetext", {
+        .put("http://localhost:3001/updatetext", {
           text: newText,
           id: id,
         })
         .then((res) => {
+          console.log(res);
           setmessages(
             messages.map((item: any) => {
-              return item._id == id ? { text: item.text, _id: id } : item;
+              return item._id == id ? { text: newText, _id: id } : item;
             })
           );
         })
         .catch((error) => {
           console.log(error);
         });
+    } catch (error) {
+      console.log(`UPDATE ERROR: ${error}`);
     }
   };
+
+  useEffect(() => {
+    var current = new Date();
+    var time1 = current.toLocaleTimeString();
+    var cy = current.getFullYear();
+    var cm = current.getMonth() + 1;
+    var cd = current.getDate();
+    var time2 = current.toLocaleDateString();
+    settime(`${cd}/${cm}/${cy} at ${time1}`);
+  }, [text]);
 
   return (
     <div className="inputdiv">
